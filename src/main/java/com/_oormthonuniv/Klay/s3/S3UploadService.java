@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class S3UploadService {
@@ -18,15 +20,22 @@ public class S3UploadService {
     private String bucket;
     @Value("${klay.s3.folder}")
     private String folder;
+    @Value("${cloud.aws.region.static}")
+    private String region;
 
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            String fileName = file.getOriginalFilename();
-            String fileUrl = "https://" + bucket + "/" + folder + "/" + fileName;
+            String originalFilename = file.getOriginalFilename();
+            if (originalFilename == null || originalFilename.isEmpty()) {
+                throw new IllegalArgumentException("Invalid file name.");
+            }
+            String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+            String fileName = UUID.randomUUID() + "." + extension;
+            String fileUrl = "https://" + bucket + ".s3." + region + ".amazonaws.com/" + folder + "/" + fileName;
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(file.getContentType());
             metadata.setContentLength(file.getSize());
-            amazonS3Client.putObject(bucket, fileName, file.getInputStream(), metadata);
+            amazonS3Client.putObject(bucket, folder + "/" + fileName, file.getInputStream(), metadata);
             return fileUrl;
         } catch (Exception e) {
             // todo: to fomal exception handling
