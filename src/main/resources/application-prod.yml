@@ -11,6 +11,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-Klay:
+klay:
   s3:
     folder: prod

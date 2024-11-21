@@ -16,7 +16,7 @@ public class S3UploadService {
     private final AmazonS3Client amazonS3Client;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    @Value("${Klay.s3.folder}")
+    @Value("${klay.s3.folder}")
     private String folder;
 
     public String uploadFile(@RequestParam("file") MultipartFile file) {
