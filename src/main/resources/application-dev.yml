@@ -11,3 +11,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+Klay:
+  s3:
+    folder: dev
