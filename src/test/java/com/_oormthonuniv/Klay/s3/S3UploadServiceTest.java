@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Import(S3MockConfig.class)
 @SpringBootTest
-@ActiveProfiles("dev")
 class S3UploadServiceTest {
     @Autowired
     private S3Mock s3Mock;

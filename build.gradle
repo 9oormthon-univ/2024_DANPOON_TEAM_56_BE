@@ -37,5 +37,9 @@ dependencies {
 }
 
 tasks.named('test') {
+    // test 작업은 application-dev.yml 프로파일과 사용
+    test {
+        systemProperty 'spring.profiles.active', 'dev'
+    }
     useJUnitPlatform()
 }
