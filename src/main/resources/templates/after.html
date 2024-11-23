@@ -3,12 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인 끝!!</title>
-    <meta http-equiv="refresh" content="5;url=https://klay-ten.vercel.app/home">
+    <meta http-equiv="refresh" content="2;url=https://klay-ten.vercel.app/home">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .nickname {
+            font-size: 1.2em;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            .message {
+                font-size: 1.2em;
+            }
+            .nickname {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-로그인 성공!
-<div th:if="${nickname}">
-    <p th:text="'환영합니다, ' + ${nickname} + '님!'"></p>
+<div class="container">
+    <div class="message">로그인 성공! 곧 이동합니다!</div>
+    <div th:if="${nickname}" class="nickname">
+        <p th:text="'환영합니다, ' + ${nickname} + '님!'"></p>
+    </div>
     <a href="/check-cookies">Cookie Page</a>
     <a href="/logout">로그아웃</a>
 </div>

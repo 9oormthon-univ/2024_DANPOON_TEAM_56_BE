@@ -68,7 +68,7 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/check-cookies")
+        @GetMapping("/check-cookies")
     public String checkCookies(HttpServletRequest request, Model model) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
