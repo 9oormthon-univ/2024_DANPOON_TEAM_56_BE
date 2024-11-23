@@ -22,7 +22,7 @@ public class AuthService {
     @Value("d67abb59691d4f30320c647af9334ce9")
     private String restApiKey;
 
-    @Value("https://127.0.0.1/")
+    @Value("http://10.1.9.224:3000/")
     private String redirectUri;
 
     @Autowired
