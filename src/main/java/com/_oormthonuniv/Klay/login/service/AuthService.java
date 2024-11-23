@@ -22,7 +22,7 @@ public class AuthService {
     @Value("d67abb59691d4f30320c647af9334ce9")
     private String restApiKey;
 
-    @Value("https://klay-ten.vercel.app/api/login/after")
+    @Value("http://127.0.0.1:8080/login/after")
     private String redirectUri;
 
     @Autowired
@@ -51,7 +51,7 @@ public class AuthService {
             return responseNode.getBody().get("access_token").asText();
         } catch (HttpClientErrorException e) {
             log.error("Error during getting access token: {}", e.getResponseBodyAsString());
-            throw e;
+            throw new RuntimeException("Failed to get access token from Kakao", e);
         }
     }
 

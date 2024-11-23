@@ -50,7 +50,7 @@ public class AuthController {
         String kakaoId = authService.getKakaoIdByAccessToken(token);
         setCookie(kakaoId, response);
 
-        return "redirect:https://klay-ten.vercel.app/home";
+        return "after";
     }
 
     @PostMapping("/cookie")
