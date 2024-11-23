@@ -18,11 +18,11 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class AuthService {
-    // todo : application.properties로 옮기기
+
     @Value("d67abb59691d4f30320c647af9334ce9")
     private String restApiKey;
 
-    @Value("https://klay-ten.vercel.app/")
+    @Value("https://klay-ten.vercel.app/api/login/after")
     private String redirectUri;
 
     @Autowired
