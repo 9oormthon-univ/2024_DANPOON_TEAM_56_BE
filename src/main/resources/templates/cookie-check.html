@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie 확인</title>
+</head>
+<body>
+<h1>Cookie 확인</h1>
+<p th:if="${cookieValue != null}">
+    Cookie 값: <span th:text="${cookieValue}"></span>
+</p>
+<p th:if="${cookieValue == null}">
+    'kakaoId'에 아무것도 없습니다!
+</p>
+</body>
+</html>
