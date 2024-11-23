@@ -1,15 +1,19 @@
 package com._oormthonuniv.Klay.challenge.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@AllArgsConstructor
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 
 public class Mission {
 
@@ -20,8 +24,6 @@ public class Mission {
     private int level;        // 미션의 난이도 레벨
 
     private String description; // 미션 내용
-
-    // 기본 생성자, getters, setters 추가
 
     public Long getId() {
         return id;
