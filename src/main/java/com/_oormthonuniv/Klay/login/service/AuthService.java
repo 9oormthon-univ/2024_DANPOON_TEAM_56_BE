@@ -22,7 +22,7 @@ public class AuthService {
     @Value("d67abb59691d4f30320c647af9334ce9")
     private String restApiKey;
 
-    @Value("http://127.0.0.1:8080/login/after")
+    @Value("https://klay-ten.vercel.app/api/login/after")
     private String redirectUri;
 
     @Autowired
