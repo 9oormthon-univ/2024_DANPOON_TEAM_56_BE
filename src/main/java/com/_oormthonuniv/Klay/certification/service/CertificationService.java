@@ -55,7 +55,6 @@ public class CertificationService {
             data = certificationRepository.findByChallengeIdAndUserId(pageable, userId.get(), challengeId.get());
         } else if (userId.isPresent()) {
             data = certificationRepository.findByUserId(pageable, userId.get());
-            System.out.println("test");
         } else if (challengeId.isPresent()) {
             data = certificationRepository.findByChallengeId(pageable, challengeId.get());
         } else {
