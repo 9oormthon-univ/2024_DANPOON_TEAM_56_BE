@@ -38,7 +38,7 @@ public class AuthController {
         idCookie.setMaxAge(0);
         response.addCookie(idCookie);
 
-        return "login";
+        return "redirect:/api/login";
     }
 
     @GetMapping("/login/after")
