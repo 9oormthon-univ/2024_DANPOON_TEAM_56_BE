@@ -18,11 +18,11 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class AuthService {
-
-    @Value("키")
+    // todo : application.properties로 옮기기
+    @Value("d67abb59691d4f30320c647af9334ce9")
     private String restApiKey;
 
-    @Value("리다이렉트")
+    @Value("http://127.0.0.1:8080/login/after")
     private String redirectUri;
 
     @Autowired
