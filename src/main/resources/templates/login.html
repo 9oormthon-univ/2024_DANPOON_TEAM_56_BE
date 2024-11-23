@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
+  <title>카카오 로그인 MVC</title>
 </head>
 <body>
-<h1>Login Page</h1>
-<p>Please log in to access the protected page.</p>
-<form action="/login/after" method="post">
-  <input type="hidden" name="code" value="your_code_here">
-  <button type="submit">Login</button>
-</form>
+<h1>로그인</h1>
+<a href="https://kauth.kakao.com/oauth/authorize?client_id=d67abb59691d4f30320c647af9334ce9&redirect_uri=https://klay-ten.vercel.app/api/login/after&response_type=codee">
+  <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" alt="Kakao Login Button">
+</a>
 </body>
 </html>
