@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class MainController {
 
-    @GetMapping(value={"/main"})
+    @GetMapping
     public String main() {
         return "index";
     }

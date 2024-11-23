@@ -19,18 +19,16 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
 @SessionAttributes("nickname")
-@RequestMapping("/api")
 public class AuthController {
 
     private final AuthService authService;
 
     @GetMapping("/logout")
     public String logout(Model model, HttpServletResponse response) {
-
-        // 로그아웃 쿠키 삭제 (음.. 작동을 할까요...?)
         model.addAttribute("nickname", null);
         Cookie codeCookie = new Cookie("code", null);
         codeCookie.setMaxAge(0);
@@ -45,25 +43,22 @@ public class AuthController {
 
     @GetMapping("/login/after")
     public String kakaoRedirect(@RequestParam("code") String code, Model model, HttpServletResponse response) {
-        // 카카오 로그인 부분
         String token = authService.kakaoGetAccessViaCode(code);
         String nickname = authService.kakaoGetUserInfoViaAccessToken(token);
         model.addAttribute("nickname", nickname);
 
-        // 쿠키에 kakaoId 저장 부분
         String kakaoId = authService.getKakaoIdByAccessToken(token);
         setCookie(kakaoId, response);
 
         return "redirect:https://klay-ten.vercel.app/home";
     }
 
-    // 쿠키 생성
     @PostMapping("/cookie")
     public ResponseEntity<String> setCookie(@RequestParam("kakaoId") String kakaoId, HttpServletResponse response) {
         Cookie cookie = new Cookie("kakaoId", kakaoId);
-        cookie.setHttpOnly(true); // JavaScript에서 접근 불가능하도록 설정
+        cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(7 * 24 * 60 * 60); // 7일 동안 유효
+        cookie.setMaxAge(7 * 24 * 60 * 60);
         response.addCookie(cookie);
         return ResponseEntity.ok("Cookie set!");
     }
@@ -73,7 +68,6 @@ public class AuthController {
         return "login";
     }
 
-    // 쿠키 확인 페이지
     @GetMapping("/check-cookies")
     public String checkCookies(HttpServletRequest request, Model model) {
         Cookie[] cookies = request.getCookies();
@@ -89,7 +83,6 @@ public class AuthController {
         return "cookie-check";
     }
 
-    // 유저 정보 조회
     @GetMapping("/info")
     public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
