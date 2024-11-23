@@ -99,4 +99,8 @@ public class AuthService {
         JsonNode userInfo = responseNode.getBody();
         return userInfo.get("id").asText();
     }
+
+    public Optional<User> getUserByKakaoId(String kakaoId) {
+        return userRepository.findByKakaoId(kakaoId);
+    }
 }

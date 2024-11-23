@@ -1,11 +1,18 @@
 package com._oormthonuniv.Klay.login.controller;
 
+import com._oormthonuniv.Klay.login.entity.User;
 import com._oormthonuniv.Klay.login.service.AuthService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -47,5 +54,30 @@ public class LoginRestController {
         response.addCookie(idCookie);
 
         return ResponseEntity.ok("로그아웃 성공!");
+    }
+
+    // 유저 정보 조회
+    @GetMapping("/info")
+    public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("kakaoId".equals(cookie.getName())) {
+                    String kakaoId = cookie.getValue();
+                    Optional<com._oormthonuniv.Klay.login.entity.User> userOptional = authService.getUserByKakaoId(kakaoId);
+                    if (userOptional.isPresent()) {
+                        User user = userOptional.get();
+                        Map<String, String> userInfo = new HashMap<>();
+                        userInfo.put("id", user.getId().toString());
+                        userInfo.put("nickname", user.getNickname());
+                        userInfo.put("profileImageUrl", user.getProfileImageUrl());
+                        return ResponseEntity.ok(userInfo);
+                    } else {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("사용자 조회 실패!");
+                    }
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("쿠키가 존재하지 않습니다!");
     }
 }
