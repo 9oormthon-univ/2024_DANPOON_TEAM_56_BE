@@ -22,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @SessionAttributes("nickname")
+@RequestMapping("/api")
 public class AuthController {
 
     private final AuthService authService;
